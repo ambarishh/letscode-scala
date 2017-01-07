@@ -1,7 +1,7 @@
 package arrays
 
 /**
-  * Created by ahazarnis on 1/6/17.
+  * Created by Ambarish Hazarnis on 1/6/17.
   * Question link- https://leetcode.com/problems/two-sum/
   */
 
