@@ -1,4 +1,4 @@
-package arrays
+package S99
 
 import scala.annotation.tailrec
 
@@ -7,14 +7,14 @@ import scala.annotation.tailrec
   * My attempts to solve the 99 scala problems
   * Link- http://aperiodic.net/phil/scala/s-99/
   */
-class S99{
+class S1to10{
 
   /*
       P01 (*) Find the last element of a list.
       Use of Scala generics. Type parameter must be placed after function name.
    */
   @tailrec
-   final def last[T](list: List[T]):Option[T]={
+  final def last[T](list: List[T]):Option[T]={
     list match {
       case h::Nil => Some(h)
       case _::tl => last(tl)
@@ -27,7 +27,7 @@ class S99{
   */
   @tailrec
   final def penultimate[T](list:List[T]):Option[T]={
-   list match {
+    list match {
       case h::_::Nil => Some(h)
       case _::tail => penultimate(tail)
       case Nil => None
@@ -85,13 +85,35 @@ class S99{
     }
   }
 
+  /*
+      P09 (**) Pack consecutive duplicates of list elements into sublists.
+      def span(p : (A) => Boolean) : (List[A], List[A])
+        Returns the longest prefix of the list whose elements all satisfy the given predicate, and the rest of the list.
+        Parameters
+        p - the test predicate
+        Returns
+        a pair consisting of the longest prefix of the list whose elements all satisfy p, and the rest of the list.
 
+   */
+  def pack[T](list: List[T]):List[List[T]]={
+    val (packed,next) = list.span{ _ == list.head}
+    if(next==Nil)  List(packed)
+    else           packed :: pack(next)
+  }
+
+  /*
+      P10 (*) Run-length encoding of a list.
+  */
+  def encode[T](list: List[T]):List[(Int,T)]={
+    val packed = pack(list)
+    packed.map(list => (list.length,list.head))
+  }
 
 
 
 }
 
-object S99{
-  def apply(): S99 = new S99()
+object S1to10{
+  def apply(): S1to10 = new S1to10()
 }
 
